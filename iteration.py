@@ -46,6 +46,6 @@ if __name__ == '__main__':
     set_up()
     eta = eta()
     h_i = iteration(eta)
-    h_i = h_i + 1.
-    plt.plot(eta.r, h_i)
+    gr = h_i + 1.
+    plt.plot(eta.r, gr)
     plt.show()

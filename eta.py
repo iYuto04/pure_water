@@ -37,13 +37,14 @@ class eta:
         1を返したら誤差がまだtolに収まってないので計算続行
         0を返したら誤差がtolに収まったので計算終了
         '''
+        mix_param = 0.005 #mixing parameter
         now_diff = np.max(np.absolute(self.value - new_value))
         if now_diff > self.__pre_diff:
             print('誤差が収束していません')
             sys.exit()
         elif now_diff > self.__tol:
             self.__pre_value = self.value
-            self.value = new_value
+            self.value = mix_param * new_value + (1. - mix_param) * self.__pre_value
             self.__pre_diff = now_diff
             print('now_diff < pre_diff')
             print(now_diff)
