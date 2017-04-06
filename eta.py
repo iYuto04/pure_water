@@ -17,8 +17,8 @@ class eta:
     value = []
     pre_value = []
     potential = []
-    r = np.arange(0, config['r_range'], config['delta_r'])
-
+    r = []
+    k = []
     __tol = 0.001
     __pre_diff = 10000
 
@@ -26,9 +26,11 @@ class eta:
         from solvent import LJ_potential
         x = np.arange(0, config['r_range'], config['delta_r'])
         y = LJ_potential(x)
+        k = np.arange(0, config['delta_k'] * config['N'], config['delta_k'])
         self.potential = np.array(y)
+        self.r = np.array(x)
         self.value = np.exp(-config['beta'] * y) - 1.
-
+        self.k = k
     def check_diff(new_value):
         '''
         etaの収束計算のための関数
@@ -55,5 +57,4 @@ if __name__ == '__main__':
         plt.plot(x,y)
         plt.show()
     eta = eta()
-    x = np.arange(0, config['r_range'], config['delta_r'])
     plot_eta(eta.r,eta.value)
