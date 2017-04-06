@@ -3,9 +3,11 @@
 辞書型のkeyに対して適切な単位の値を指定すること.
 sigma[Å]
 epsilon[kcal/mol]
+rho[個/(Å)^3]
 '''
 
-solvent = {'name':"Ar", 'sigma': 3.4, 'epsilon': 2.41e-1}
+# solvent = {'name':"Ar", 'sigma': 3.4, 'epsilon': 2.41e-1,'rho': 1.398e-24}
+solvent = {'name': 'Ar', 'sigma': 3.4, 'epsilon': 2.41e-1, 'rho':2.16e-2}
 
 def LJ_potential(x):
     '''np.array型のxを受け取るとそれに対応するLJポテンシャルの値を返す
