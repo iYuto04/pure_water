@@ -1,4 +1,8 @@
 from config import config
+from iteration import iteration
+from eta import eta
+import matplotlib.pyplot as plt
+
 def set_up():
     import numpy as np
     config['delta_r'] = config['r_range'] / config['N']
@@ -9,5 +13,8 @@ def set_up():
 
 if __name__ == '__main__':
     set_up()
-    print(config)
-    print('hello')
+    eta = eta()
+    h_i = iteration(eta)
+    gr = h_i + 1.
+    plt.plot(eta.r, gr)
+    plt.show()
