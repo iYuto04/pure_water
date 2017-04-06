@@ -19,7 +19,7 @@ class eta:
     potential = []
     r = []
     k = []
-    __tol = 0.001
+    __tol = 1e-3
     __pre_diff = 10000
 
     def __init__(self):
@@ -31,18 +31,27 @@ class eta:
         self.r = np.array(x)
         self.value = np.exp(-config['beta'] * y) - 1.
         self.k = k
-    def check_diff(new_value):
+    def check_diff(self, new_value):
         '''
         etaの収束計算のための関数
+        1を返したら誤差がまだtolに収まってないので計算続行
+        0を返したら誤差がtolに収まったので計算終了
         '''
         now_diff = np.max(np.absolute(self.value - new_value))
-        if now_diff > pre_diff:
+        if now_diff > self.__pre_diff:
             print('誤差が収束していません')
             sys.exit()
         elif now_diff > self.__tol:
-            self.pre_value = self.value
+            self.__pre_value = self.value
             self.value = new_value
             self.__pre_diff = now_diff
+            print('now_diff < pre_diff')
+            print(now_diff)
+            return 1
+        elif now_diff < self.__tol:
+            print('now_diff < tol')
+            print(now_diff)
+            return 0
 
 if __name__ == '__main__':
     '''
